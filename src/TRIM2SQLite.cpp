@@ -275,6 +275,10 @@ bool COLLISON::Next()
             std::cout << " ion number mismatch -> skipping this line" << std::endl;
             continue;
         }
+        else
+        {
+            fIonNumber = ionNumber;
+        }
 
         fvEnergy.push_back(std::stod(sLine.substr(7, 9)) * 1.0e+3); //eV
 
