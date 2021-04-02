@@ -54,7 +54,7 @@ std::vector<TRIM2SQLite::CollisionRecord>
 CollisionDBHandler::GetTrack(int _trackID)
 {
     std::string sQuery = "SELECT * FROM collisions ";
-    sQuery += "WHERE track_id = " + std::to_string(_trackID) + "　ORDER BY collision_id;";
+    sQuery += "WHERE track_id = " + std::to_string(_trackID) + " ORDER BY collision_id;";
     std::vector<TRIM2SQLite::CollisionRecord> ret;
     ExecuteSelectQuery(sQuery, ret);
     return ret;
