@@ -1,4 +1,4 @@
-#　TrackTrimSQLite
+# TrackTrimSQLite
 ## 概要
 Garfield++の飛跡生成クラスTrackSrimがうまく動作していないようだったので、
 代わりになるTrackクラス (TrackTrimSQLite) をつくりました。
