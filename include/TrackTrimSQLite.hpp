@@ -46,7 +46,7 @@ namespace GarfieldSuppl
         int GetTargetClusterSize() const { return m_nsize; }
 
         void SetClustersMaximum(const int n) { m_maxclusters = n; }
-        int SetClustersMaximum() const { return m_maxclusters; }
+        int GetClustersMaximum() const { return m_maxclusters; }
 
         bool ReadFile(const std::string &file);
 
