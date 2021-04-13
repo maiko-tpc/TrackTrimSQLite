@@ -48,6 +48,10 @@ namespace GarfieldSuppl
         void SetClustersMaximum(const int n) { m_maxclusters = n; }
         int GetClustersMaximum() const { return m_maxclusters; }
 
+        void EnableNonUniformCollision() { m_nonuniform_collision = true; };
+        void DisableNonUniformCollision() { m_nonuniform_collision = false; };
+        bool IsNonUniformCollisionEnabled() const { return m_nonuniform_collision; };
+
         bool ReadFile(const std::string &file);
 
         virtual bool NewTrack(const double x0, const double y0, const double z0,
@@ -68,6 +72,9 @@ namespace GarfieldSuppl
 
         /// Targeted cluster size
         int m_nsize = -1;
+
+        // Generate collisions non-uniformly
+        bool m_nonuniform_collision = true;
 
         struct cluster
         {

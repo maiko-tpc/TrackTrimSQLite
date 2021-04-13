@@ -4,6 +4,8 @@
 
 #include "TrackTrimSQLite.hpp"
 
+#include <numeric>
+
 namespace GarfieldSuppl
 {
 
@@ -222,14 +224,31 @@ namespace GarfieldSuppl
 
             const int nDiv = nClusters + 1;
 
+            std::vector<double> vClusterAt(nClusters);
+            //bool uniform = false;
+            if (!IsNonUniformCollisionEnabled()) // -> uniform collision
+            {
+                std::iota(vClusterAt.begin(), vClusterAt.end(), 1);
+                std::for_each(vClusterAt.begin(), vClusterAt.end(), [&nDiv](auto &_x) { _x /= (double)nDiv; });
+            }
+            else // non-uniform collision
+            {
+                std::for_each(vClusterAt.begin(), vClusterAt.end(), [](auto &_x) { _x = RndmUniform(); });
+                std::sort(vClusterAt.begin(), vClusterAt.end());
+            }
+
             for (int iCluster = 0; iCluster < nClusters; ++iCluster)
             {
 
                 cluster newcluster;
                 double x_cls, y_cls, z_cls;
-                x_cls = x_col + dr * dir_x_col * (iCluster + 1) / nDiv;
-                y_cls = y_col + dr * dir_y_col * (iCluster + 1) / nDiv;
-                z_cls = z_col + dr * dir_z_col * (iCluster + 1) / nDiv;
+                // x_cls = x_col + dr * dir_x_col * (iCluster + 1) / nDiv;
+                // y_cls = y_col + dr * dir_y_col * (iCluster + 1) / nDiv;
+                // z_cls = z_col + dr * dir_z_col * (iCluster + 1) / nDiv;
+
+                x_cls = x_col + dr * dir_x_col * vClusterAt.at(iCluster);
+                y_cls = y_col + dr * dir_y_col * vClusterAt.at(iCluster);
+                z_cls = z_col + dr * dir_z_col * vClusterAt.at(iCluster);
 
                 if (!IsInside(x_cls, y_cls, z_cls))
                     continue;
